@@ -1,0 +1,485 @@
+<?php
+$nama  = "Haikal Rasya Ramadhan";
+$bio   = "Saya lahir di Depok pada tanggal 16 September 2007. Sebagai seorang yang energik, saya mengisi waktu luang dengan mengulik segala hal, mengajarkan saya tentang ketangkasan, strategi, dan konsistensi.";
+$produk = "Pembuatan Website";
+$tagline = "Website elegan, cepat, dan siap dipakai untuk personal brand maupun bisnis.";
+?>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><?= htmlspecialchars($nama) ?> • <?= htmlspecialchars($produk) ?></title>
+
+  <style>
+    :root{
+      --bg: #0b0f1a;
+      --panel: rgba(255,255,255,0.06);
+      --panel-2: rgba(255,255,255,0.08);
+      --text: rgba(255,255,255,0.92);
+      --muted: rgba(255,255,255,0.68);
+      --border: rgba(255,255,255,0.12);
+      --shadow: 0 20px 60px rgba(0,0,0,0.45);
+      --radius: 18px;
+      --accent: #7c5cff;
+      --accent2:#22d3ee;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
+      color:var(--text);
+      background: radial-gradient(1200px 700px at 15% 10%, rgba(124,92,255,0.22), transparent 55%),
+                  radial-gradient(900px 600px at 80% 30%, rgba(34,211,238,0.16), transparent 55%),
+                  var(--bg);
+      overflow-x:hidden;
+    }
+
+    body.light{
+      --bg:#f7f7fb;
+      --panel: rgba(15, 23, 42, 0.06);
+      --panel-2: rgba(15, 23, 42, 0.08);
+      --text: rgba(15, 23, 42, 0.92);
+      --muted: rgba(15, 23, 42, 0.68);
+      --border: rgba(15, 23, 42, 0.12);
+      --shadow: 0 20px 60px rgba(15, 23, 42, 0.12);
+    }
+
+    a{ color:inherit; text-decoration:none; }
+    .container{ width:min(1100px, 92vw); margin:0 auto; }
+
+    .bg-orb{
+      position:fixed; width:420px; height:420px;
+      filter: blur(40px); opacity:0.55; z-index:-1;
+      border-radius:999px;
+      background: radial-gradient(circle at 30% 30%, rgba(124,92,255,0.65), transparent 55%);
+    }
+    .orb-1{ left:-140px; top:60px; }
+    .orb-2{
+      right:-160px; top:240px;
+      background: radial-gradient(circle at 30% 30%, rgba(34,211,238,0.55), transparent 55%);
+    }
+
+    .topbar{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(14px);
+      background: linear-gradient(to bottom, rgba(0,0,0,0.38), rgba(0,0,0,0.10));
+      border-bottom: 1px solid var(--border);
+    }
+    body.light .topbar{
+      background: linear-gradient(to bottom, rgba(255,255,255,0.75), rgba(255,255,255,0.35));
+    }
+    .topbar-inner{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 0;
+      gap:12px;
+    }
+    .brand{ display:flex; gap:10px; align-items:center; }
+    .brand-dot{
+      width:10px; height:10px; border-radius:999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 20px rgba(124,92,255,0.55);
+    }
+    .brand-text{ font-weight:700; letter-spacing:0.2px; }
+
+    .nav{ display:flex; gap:18px; }
+    .nav a{
+      color:var(--muted);
+      padding:8px 10px;
+      border-radius:999px;
+      transition: 180ms ease;
+    }
+    .nav a:hover{
+      color:var(--text);
+      background: var(--panel);
+    }
+
+    .hero{ padding:52px 0 22px; }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.2fr 0.9fr;
+      gap:22px;
+      align-items:stretch;
+    }
+    .chip{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 12px;
+      border: 1px solid var(--border);
+      background: var(--panel);
+      border-radius:999px;
+      color:var(--muted);
+      width:fit-content;
+    }
+    .headline{
+      margin:14px 0 10px;
+      font-size: clamp(28px, 3.4vw, 44px);
+      line-height: 1.08;
+      letter-spacing: -0.6px;
+    }
+    .subhead{
+      margin:0 0 18px;
+      color:var(--muted);
+      max-width: 58ch;
+    }
+
+    .cta-row{ display:flex; gap:12px; flex-wrap:wrap; margin: 14px 0 18px; }
+
+    .btn{
+      border: 1px solid var(--border);
+      background: var(--panel);
+      color: var(--text);
+      padding: 11px 14px;
+      border-radius: 14px;
+      cursor:pointer;
+      transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
+      user-select:none;
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:8px;
+    }
+    .btn:hover{ transform: translateY(-1px); background: var(--panel-2); }
+    .btn:active{ transform: translateY(0px); }
+
+    .btn-primary{
+      background: linear-gradient(135deg, rgba(124,92,255,0.95), rgba(34,211,238,0.75));
+      border-color: rgba(255,255,255,0.22);
+      box-shadow: 0 16px 40px rgba(124,92,255,0.20);
+    }
+    .btn-primary:hover{ background: linear-gradient(135deg, rgba(124,92,255,1), rgba(34,211,238,0.85)); }
+
+    .btn-ghost{ padding:10px 12px; border-radius: 999px; }
+
+    .btn-glow{ position:relative; border-color: rgba(124,92,255,0.35); }
+    .btn-glow::after{
+      content:"";
+      position:absolute; inset:-1px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(124,92,255,0.25), rgba(34,211,238,0.18));
+      filter: blur(10px);
+      z-index:-1;
+      opacity:0;
+      transition: opacity 180ms ease;
+    }
+    .btn-glow:hover::after{ opacity:1; }
+
+    .stats{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap:12px;
+      margin-top: 10px;
+    }
+    .stat{
+      border:1px solid var(--border);
+      background: var(--panel);
+      border-radius: var(--radius);
+      padding: 12px;
+    }
+    .stat-num{ font-weight:750; }
+    .stat-label{ color:var(--muted); font-size: 13px; margin-top:4px; }
+
+    .hero-card .card{
+      border:1px solid var(--border);
+      background: linear-gradient(180deg, var(--panel), rgba(255,255,255,0.03));
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:18px;
+      height:100%;
+    }
+    .avatar{
+      width:46px; height:46px; border-radius: 16px;
+      display:flex; align-items:center; justify-content:center;
+      background: linear-gradient(135deg, rgba(124,92,255,0.35), rgba(34,211,238,0.25));
+      border:1px solid rgba(255,255,255,0.14);
+      font-weight:800;
+    }
+    .card-title{ margin-top:10px; }
+    .card-title h2{ margin:0; font-size: 18px; }
+    .muted{ color: var(--muted); }
+    .bio{ margin: 12px 0 14px; color: var(--muted); line-height: 1.55; }
+
+    .pill-row{ display:flex; gap:8px; flex-wrap:wrap; }
+    .pill{
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .section{ padding: 26px 0 42px; }
+    .section-head{ margin-bottom: 14px; }
+    .section-head h3{ margin:0 0 6px; font-size: 22px; }
+    .grid-3{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap:12px;
+    }
+    .service{
+      border:1px solid var(--border);
+      background: var(--panel);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.18);
+    }
+    .service h4{ margin: 0 0 8px; }
+    .service p{ margin:0 0 12px; color: var(--muted); line-height: 1.55; }
+    .btn-mini{ padding: 9px 12px; border-radius: 12px; }
+
+    .contact{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:16px;
+      align-items:start;
+    }
+    .form{
+      border:1px solid var(--border);
+      background: var(--panel);
+      border-radius: var(--radius);
+      padding: 16px;
+    }
+    label{ display:block; margin-bottom: 12px; color: var(--muted); font-size: 14px; }
+    input, textarea{
+      width:100%;
+      margin-top:6px;
+      border-radius: 14px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      padding: 12px;
+      color: var(--text);
+      outline:none;
+    }
+    input:focus, textarea:focus{ border-color: rgba(124,92,255,0.55); }
+    .tiny{ font-size: 12px; margin-top: 10px; }
+
+    .footer{
+      border-top:1px solid var(--border);
+      padding: 18px 0;
+      background: rgba(0,0,0,0.10);
+    }
+    body.light .footer{ background: rgba(255,255,255,0.55); }
+    .footer-inner{ display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; }
+
+    .toast{
+      position: fixed;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.55);
+      border: 1px solid rgba(255,255,255,0.18);
+      color: rgba(255,255,255,0.92);
+      padding: 10px 12px;
+      border-radius: 14px;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+      opacity:0;
+      pointer-events:none;
+      transition: opacity 180ms ease, transform 180ms ease;
+      max-width: min(520px, 92vw);
+      text-align:center;
+    }
+    .toast.show{
+      opacity:1;
+      transform: translateX(-50%) translateY(-2px);
+    }
+
+    @media (max-width: 900px){
+      .hero-grid{ grid-template-columns: 1fr; }
+      .stats{ grid-template-columns: 1fr; }
+      .grid-3{ grid-template-columns: 1fr; }
+      .contact{ grid-template-columns: 1fr; }
+      .nav{ display:none; }
+    }
+  </style>
+</head>
+
+<body id="top">
+  <div class="bg-orb orb-1" aria-hidden="true"></div>
+  <div class="bg-orb orb-2" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a class="brand" href="#top">
+        <span class="brand-dot"></span>
+        <span class="brand-text">Haikal Studio</span>
+      </a>
+
+      <nav class="nav">
+        <a href="#profil">Profil</a>
+        <a href="#layanan">Layanan</a>
+        <a href="#kontak">Kontak</a>
+      </nav>
+
+      <button class="btn btn-ghost" id="themeBtn" type="button" aria-label="Toggle tema">
+        <span id="themeIcon">☾</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-left">
+          <p class="chip">Jasa <?= htmlspecialchars($produk) ?></p>
+          <h1 class="headline"><?= htmlspecialchars($tagline) ?></h1>
+          <p class="subhead">
+            Saya buat website yang responsif, rapi, dan terlihat premium — biar brand kamu tampil meyakinkan sejak detik pertama.
+          </p>
+
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#layanan">Lihat Paket</a>
+
+            <!-- tombol/link interaktif ke claude.php -->
+            <a class="btn btn-glow" href="claude.php" id="goClaude">
+              Menuju claude.php →
+            </a>
+          </div>
+
+          <div class="stats">
+            <div class="stat">
+              <div class="stat-num">Responsive</div>
+              <div class="stat-label">Mobile-first layout</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num">Elegan</div>
+              <div class="stat-label">Clean & modern UI</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num">Cepat</div>
+              <div class="stat-label">Optimized assets</div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="hero-card" id="profil">
+          <div class="card">
+            <div class="avatar" aria-hidden="true">HR</div>
+            <div class="card-title">
+              <h2><?= htmlspecialchars($nama) ?></h2>
+              <p class="muted">Web Developer • Depok</p>
+            </div>
+
+            <p class="bio"><?= htmlspecialchars($bio) ?></p>
+
+            <div class="pill-row">
+              <span class="pill">PHP</span>
+              <span class="pill">JavaScript</span>
+              <span class="pill">CSS</span>
+              <span class="pill">UI Elegan</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="layanan">
+      <div class="container">
+        <div class="section-head">
+          <h3>Layanan</h3>
+          <p class="muted">Fokus pada tampilan modern, struktur rapi, dan pengalaman pengguna yang enak.</p>
+        </div>
+
+        <div class="grid-3">
+          <div class="service">
+            <h4>Landing Page</h4>
+            <p>1 halaman cepat untuk promosi, CTA jelas, tampil profesional.</p>
+            <button class="btn btn-mini" data-toast="Landing Page dipilih ✅">Pilih</button>
+          </div>
+
+          <div class="service">
+            <h4>Company Profile</h4>
+            <p>Profil bisnis/organisasi: layanan, portofolio, kontak, dan section rapi.</p>
+            <button class="btn btn-mini" data-toast="Company Profile dipilih ✅">Pilih</button>
+          </div>
+
+          <div class="service">
+            <h4>Custom Website</h4>
+            <p>Lebih fleksibel: form, halaman tambahan, fitur sesuai kebutuhan.</p>
+            <button class="btn btn-mini" data-toast="Custom Website dipilih ✅">Pilih</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="kontak">
+      <div class="container contact">
+        <div>
+          <h3>Kontak</h3>
+          <p class="muted">Tulis kebutuhanmu. (Form demo — bisa disambungkan ke email/DB.)</p>
+        </div>
+
+        <form class="form" onsubmit="return handleSubmit(event)">
+          <label>
+            Nama
+            <input type="text" name="nama" placeholder="Nama kamu" required />
+          </label>
+          <label>
+            Pesan
+            <textarea name="pesan" placeholder="Kebutuhan websitenya apa?" rows="4" required></textarea>
+          </label>
+          <button class="btn btn-primary" type="submit">Kirim</button>
+          <p class="muted tiny" id="formStatus" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p>© <?= date('Y') ?> <?= htmlspecialchars($nama) ?> • All rights reserved.</p>
+      <a class="muted" href="#top" onclick="window.scrollTo({top:0, behavior:'smooth'}); return false;">Kembali ke atas ↑</a>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    // Tema (dark/light) + simpan preferensi
+    const themeBtn = document.getElementById("themeBtn");
+    const themeIcon = document.getElementById("themeIcon");
+    const saved = localStorage.getItem("theme");
+
+    if (saved === "light") {
+      document.body.classList.add("light");
+      themeIcon.textContent = "☀";
+    }
+
+    themeBtn?.addEventListener("click", () => {
+      document.body.classList.toggle("light");
+      const isLight = document.body.classList.contains("light");
+      localStorage.setItem("theme", isLight ? "light" : "dark");
+      themeIcon.textContent = isLight ? "☀" : "☾";
+    });
+
+    // Toast kecil
+    const toastEl = document.getElementById("toast");
+    function toast(msg) {
+      if (!toastEl) return;
+      toastEl.textContent = msg;
+      toastEl.classList.add("show");
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(() => toastEl.classList.remove("show"), 1600);
+    }
+
+    document.querySelectorAll("[data-toast]").forEach((btn) => {
+      btn.addEventListener("click", () => toast(btn.getAttribute("data-toast")));
+    });
+
+    // Demo submit form
+    function handleSubmit(e) {
+      e.preventDefault();
+      const status = document.getElementById("formStatus");
+      if (status) status.textContent = "Pesan kamu sudah terekam (demo). Nanti bisa dihubungkan ke email/DB.";
+      toast("Terkirim ✅ (demo)");
+      e.target.reset();
+      return false;
+    }
+    window.handleSubmit = handleSubmit;
+
+    // Efek interaktif kecil untuk link claude.php
+    const goClaude = document.getElementById("goClaude");
+    goClaude?.addEventListener("mouseenter", () => toast("Klik untuk menuju claude.php"));
+  </script>
+</body>
+</html>
